@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { GithubServiceService } from './githubService/github-service.service';
 import { ReposComponent } from './repos/repos.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReposComponent } from './repos/repos.component';
     DatePipe,
     UsersProfileComponent,
     PageNotFoundComponent,
-    ReposComponent
+    ReposComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
