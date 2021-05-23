@@ -1,3 +1,16 @@
 <div class="container">
-    
+    <app-search (searchUser)='getRepository($event)'></app-search>
+    <div class="row row-cols-1 row-cols-md-2 p-5">
+        <div class="col-md-4" *ngfor="let rep of repos">
+            <div class="card mb-3">
+                <div class="card-body card-repo">
+                    <h5 class="card-title"> {{rep.name}} </h5>
+                    <p class="card-text"> {{rep.descriptions}} </p>
+                    <p class="badge badge-success">Forks<span>{{rep.forks}}</span></p>
+                    <a [href]='rep.html_url' class="badge badge-danger">view project</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
