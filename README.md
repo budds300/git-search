@@ -1,27 +1,59 @@
 # GitSearch
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+This is an application where the user enters their github usernames and it generates the profile of the individual and also it generates all the repositories of the user.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![gitprofile](landingpage.png)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## BDD(Behavior Driven Development)
+Given :  that the user has github account
 
-## Build
+When : He or she  inputs her github username
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Then : The person is expected to get  their github profile information and their repositories
 
-## Running unit tests
+## Author 
+* Tamminga Budds
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installations
+* nodejs
+* npm
+* angularCLI
+* typescript
 
-## Running end-to-end tests
+## Project Setup
+Copy the repository link from github  then follow the steps below;
+first paste the link to clone the project 
+```
+$ git clone <repo>
+```
+After cloning  go to the directory/folder of the project you have cloned
+```
+$ cd  project-directory/folder
+```
+You then type [code .]() for VS code and [atom .]()for atom 
+```
+$ code ./atom .
+```
+To access the the live webpage you just type ng serve 
+```
+$ ng serve --open
+```
+Or you can pick the option of downlading the zip file of the project then you right click and choose extract  then you follow the steps above  on getting into the directory to the  to accessing the live webpage
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
+ ## Technologies Used
+ * HTML5
+ * CSS3
+ * Angular
+ * Typescript
+ * Git API
+## Support & Contact
+For any assistance or collaboration reach out to me on budds300@gmail.com
+## Copyright and License
+Licensed under [MIT license](LICENSE)
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+ 
