@@ -6,12 +6,7 @@ This is an application where the user enters their github usernames and it gener
 ![gitprofile](landingpage.png)
 
 
-## BDD(Behavior Driven Development)
-Given :  that the user has github account
 
-When : He or she  inputs her github username
-
-Then : The person is expected to get  their github profile information and their repositories
 
 ## Author 
 * Tamminga Budds
