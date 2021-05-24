@@ -1,16 +1,41 @@
 <div class="container">
     <app-search (searchUser)='getRepository($event)'></app-search>
+   
     <div class="row row-cols-1 row-cols-md-2 p-5">
         <div class="col-md-4" *ngfor="let rep of repos">
+           
             <div class="card mb-3">
-                <div class="card-body card-repo">
-                    <h5 class="card-title"> {{rep.name}} </h5>
+               
+                <div class="card-body card-rep">
+                    <h5 class="card-title"> {{rep.name}} hello</h5>
+                    <p class="badge bg-primary">Watchers <span>{{rep.watchers}}</span></p>
                     <p class="card-text"> {{rep.descriptions}} </p>
-                    <p class="badge badge-success">Forks<span>{{rep.forks}}</span></p>
-                    <a [href]='rep.html_url' class="badge badge-danger">view project</a>
+                    <p class="badge bg-success">Forks<span>{{rep.forks}}</span></p>
+                    <p class="creation-date"><b class="dates">Date created: {{rep.created_on|date}}</b></p>
+                    <p class="update-date"><b class="dates">Updated on: {{rep.updated_on|date}}</b></p>
+                    <a [href]='rep.html_url' class="badge bg-danger">view project</a>
+                    <a href="{{rep.html_url}}" target="_blank" class="btn btn-sm btn-warning pull-right buttons mr-3">View this project on Github <span class="glyphicon glyphicon-share-alt"></span></a>
+                    <a href="{{rep.homepage}}" target="_blank" *ngIf="rep.homepage" class="btn btn-sm btn-success pull-right buttons">View Deployed Page<span class="glyphicon glyphicon-share-alt"></span></a>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+
+<!-- <app-search (searchUser)='getRepository($event)'></app-search>    
+   <div class="container-fluid">
+    <div *ngFor="let rep of repo ; let i = index" class="card mb-3">
+        <div class="card-header">
+          <p class=repo-name>
+            <span class="work"> {{rep.name}} </span>
+          </p>
+          <p class="description">{{rep.description}}</p>
+          <p class="creation-date"><b class="dates">Date created: {{rep.created_on|date}}</b></p>
+          <p class="update-date"><b class="dates">Updated on: {{rep.updated_on|date}}</b></p>
+          <a href="{{rep.html_url}}" target="_blank" class="btn btn-sm btn-warning pull-right buttons mr-3">View this project on Github <span class="glyphicon glyphicon-share-alt"></span></a>
+            <a href="{{rep.homepage}}" target="_blank" *ngIf="rep.homepage" class="btn btn-sm btn-success pull-right buttons">View Deployed Page<span class="glyphicon glyphicon-share-alt"></span></a>
+        </div> 
+      </div>
+   </div> -->

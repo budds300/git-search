@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GitUser } from '../git-user';
-import { GithubServiceService } from '../githubService/github-service.service';
+import { GithubService } from '../githubService/github-service.service';
+import { Repo } from '../repo';
+import { RepoServiceService } from '../repo-service/repo-service.service';
 
 @Component({
   selector: 'app-users-profile',
@@ -8,21 +10,28 @@ import { GithubServiceService } from '../githubService/github-service.service';
   styleUrls: ['./users-profile.component.css']
 })
 export class UsersProfileComponent implements OnInit {
-user: GitUser[] = [];
+  public userName = '';
+  user: GitUser[] = [];
+repos!: Repo[]
 
-  constructor(private gitService:GithubServiceService) { }
+  constructor(private gitService:GithubService, private search:RepoServiceService) { }
   getSearchItem(searchItem:any){
-    this.gitService.searchUser(searchItem).then((success) => {
+    this.gitService.searchUser(searchItem).then((success:any) => {
       this.user = (this.gitService.user)
       console.log(this.user)
       },
-      (error)=>{
+      (error:any)=>{
         console.log(error)
       })
   }
 
   ngOnInit(): void {
     this.getSearchItem('budds300');
+    
+
+    this.search.getRepo(this.userName);
+    this.repos = this.search.repos;
+    console.log(this.repos);
   }
 
 }

@@ -1,36 +1,80 @@
 import { Injectable } from '@angular/core';
-import { GitUser } from '../git-user';
-import {HttpClient} from '@angular/common/http'
-import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http'
+import { GitUser  } from '../git-user';
+import { environment } from '../../environments/environment'
+import{ SearchComponent } from '../search/search.component'
+import { from } from 'rxjs';
+import { Repo } from '../repo';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class GithubServiceService {
-user : GitUser[]=[];
-environment : any;
-  constructor(private http: HttpClient) {}
-searchUser(searchItem:string){
-  interface data{
-    avatar_url: string,
-    html_url: string,
-    followers: number,
-    following: number,
-    login: string,
-    company: string,
-    public_repos: number,
-    location:string,
-    email: string,
-  }
-  return new Promise((resolve,reject)=>{
-    this.user=[];
-    this.http.get<data>(environment.apiUrl +searchItem+this.environment.gitToken).toPromise().then((results)=>{
-      this.user.push(results);
-      resolve(results);
-    },
-    (error)=>{
-      reject(console.log('Error'));
-    })
-  })
+export class GithubService {
+  user:GitUser[]= [];
+  environment: any;
+  repos:Repo[]=[]
+
+
+  constructor(private http:HttpClient) { }
+
+  searchUser(searchItem:string){
+    interface ApiResponse {
+      name: string;
+      avatar_url: string,
+      html_url: any,
+      followers: number,
+      following:number,
+      login:string,
+      company: string,
+      public_repos:number,
+      location:string,
+      email:string,
+      created_at: Date,
+      bio: string,
+      
+    }
+    return new Promise((resolve,reject)=>{
+      this.user = [];
+      this.http.get<ApiResponse>(`https://api.github.com/users/${searchItem}?gitToken=${environment.gitToken}&client_secret=${environment.Client_Secret}` ).toPromise().then((results)=>{
+        this.user.push(results);
+        resolve(searchItem);
+      },
+      (error)=>{
+        reject(console.log('Error occured'));
+      }
+      );
+    });
+    
 }
-} 
+
+getRepo(username:any){
+  interface ApiResponse {
+    name:string;
+    description:string;
+    html_url:string;
+    svn_url:string;
+    created_at:Date;
+    updated_at:Date;
+    homepage:string;
+
+  }
+  return new Promise((resolve, reject) => {   
+  this.http.get<ApiResponse[] >(`https://api.github.com/users/${username}/r?gitToken=${environment.gitToken}/&client_secret=${environment.Client_Secret}`).toPromise().then(response=>{
+    for(let i of response) {
+      let repo=new Repo('','','','','',new Date(),new Date(),'','', '',);
+      repo.name=i.name;
+      repo.description=i.description;
+      repo.html_url=i.html_url;
+      repo.svn_url=i.svn_url;
+      repo.created_on=i.created_at;
+      repo.updated_on=i.updated_at;
+      repo.homepage=i.homepage;          
+      this.repos.push(repo);
+      resolve(username);
+    }
+  })
+})
+}
+  
+}

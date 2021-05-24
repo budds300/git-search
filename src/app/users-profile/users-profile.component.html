@@ -1,28 +1,46 @@
-<div class="container-fluid pt-5 pb-5">
+<div class="landing">
+<app-search (searchUser)="getSearchItem($event)"></app-search>
+<div class="container-fluid pt-5 pb-5 content-center">
     <div class="row pt-5" *ngFor= 'let userInfo of user'>
         <div class="col-md-9 ml-auto mr-auto">
             <div class="card pt">
                 <div class="card-body d-flex flex-column align-items-center justify content-center">
                     <img class="img-fluid" [src]="userInfo.avatar_url" alt="Image">
-                <h4 class="card-title pt-3"> {{userInfo.login}}</h4>
-                <!-- <p> {{userInfo.bio}} </p> -->
+                <h4 class="card-title pt-3 text-center" > {{userInfo.login}}</h4>
+                <p> {{userInfo.bio}} </p>
                 <div class="pb-5">
-                    <span class="pl-3 badge badge-success"> Following {{userInfo.following}} </span>
-                    <span class="pl-3 badge badge-primary"> Followers {{userInfo.followers}} </span>
-                    <span class="pl-3 badge badge-dark"> Repos {{userInfo.public_repos}} </span>
+                    <span class='pl-3 badge bg-success'> Following {{userInfo.following}} </span>
+                    <span class="pl-3 badge bg-primary"> Followers {{userInfo.followers}} </span>
+                    <span class="pl-3 badge bg-dark"> Repos {{userInfo.public_repos}} </span>
                 </div>
                 <div class=" creation">
-                    <!-- <p>Created on {{userInfo.created_at|date|uppercase}} </p> -->
+                    <p>Created on {{userInfo.created_at|date|uppercase}} </p>
                 </div>
                 <p class="card-text"> <i class="far fa-envelope"></i> {{userInfo.email}} </p>
-                <p class="card-text"> <i class="fas fa-map-marker-alt"></i>{{userInfo.location}} </p>
-                <a href="userInfo.html_url" class="card-link btn btn-primary"> View profile</a>
+                <p class="card-text"> <span class="material-icons"></span>{{userInfo.location}} </p>
+                <a href="{{userInfo.html_url}}" class="card-link btn btn-primary"> View profile</a>
                 </div>
             </div>
             <div>
-                <em>powered by <i class="fab fa-github-square fa-2x"></i></em>
+                
             </div>
             
         </div>
     </div>
+    </div>
+    <div *ngFor="let repo of repos ; let i = index" class="card mb-3">
+        <div class="card-body">
+          <p class=repo-name>
+            <span class="work"> {{repo.name}} </span>
+          </p>
+          <p class="description">{{repo.description}}</p>
+          <p class="creation-date"><b class="dates">Date created: {{repo.created_on|date}}</b></p>
+          <p class="update-date"><b class="dates">Updated on: {{repo.updated_on|date}}</b></p>
+          <a href="{{repo.html_url}}" target="_blank" class="btn btn-sm btn-warning pull-right buttons mr-3">View this project on Github <span class="glyphicon glyphicon-share-alt"></span></a>
+            <a href="{{repo.homepage}}" target="_blank" *ngIf="repo.homepage" class="btn btn-sm btn-success pull-right buttons">View Deployed Page<span class="glyphicon glyphicon-share-alt"></span></a>
+        </div> 
+     
+      <em class="text-white">powered by Github<i class="fab fa-github-square fa-2x"></i></em>
 </div>
+</div>
+

@@ -1,0 +1,12 @@
+img{
+    height: 150px;
+    border-radius: 100%;
+}
+.profile{
+    display: flex;
+    justify-content: space-between;
+}
+.landing{
+    width:90%;
+    margin:auto;
+}
