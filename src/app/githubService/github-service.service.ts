@@ -13,10 +13,14 @@ import { Repo } from '../repo';
 export class GithubService {
   user:GitUser[]= [];
   environment: any;
-  repos:Repo[]=[]
+  repository!: Repo
+  repos!:any[];
+  
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    
+   }
 
   searchUser(searchItem:string){
     interface ApiResponse {
@@ -31,12 +35,12 @@ export class GithubService {
       location:string,
       email:string,
       created_at: Date,
-      bio: string,
+      bio: string
       
     }
     return new Promise((resolve,reject)=>{
       this.user = [];
-      this.http.get<ApiResponse>(`https://api.github.com/users/${searchItem}?gitToken=${environment.gitToken}&client_secret=${environment.Client_Secret}` ).toPromise().then((results)=>{
+      this.http.get<ApiResponse>(`https://api.github.com/users/${searchItem}`) .toPromise().then((results)=>{
         this.user.push(results);
         resolve(searchItem);
       },
@@ -48,8 +52,8 @@ export class GithubService {
     
 }
 
-getRepo(username:any){
-  interface ApiResponse {
+getRepoInfo(username:any){
+  interface ApiResponse{
     name:string;
     description:string;
     html_url:string;
@@ -57,24 +61,27 @@ getRepo(username:any){
     created_at:Date;
     updated_at:Date;
     homepage:string;
-
   }
-  return new Promise((resolve, reject) => {   
-  this.http.get<ApiResponse[] >(`https://api.github.com/users/${username}/r?gitToken=${environment.gitToken}/&client_secret=${environment.Client_Secret}`).toPromise().then(response=>{
-    for(let i of response) {
-      let repo=new Repo('','','','','',new Date(),new Date(),'','', '',);
-      repo.name=i.name;
-      repo.description=i.description;
-      repo.html_url=i.html_url;
-      repo.svn_url=i.svn_url;
-      repo.created_on=i.created_at;
-      repo.updated_on=i.updated_at;
-      repo.homepage=i.homepage;          
-      this.repos.push(repo);
-      resolve(username);
-    }
-  })
-})
-}
+  let promise = new Promise ((resolve,reject) => {
+    this.http.get<ApiResponse[]>(`https://api.github.com/users/budds300/repos`).toPromise().then(response => {
+      for(let i of response) {
+        let repo =new Repo('','', '', '','',new Date(),new Date(),'','', '');
+        repo.name=i.name;
+        repo.description=i.description;
+        repo.html_url=i.html_url;
+        repo.svn_url=i.svn_url;
+        repo.created_on=i.created_at;
+        repo.updated_on=i.updated_at;
+        repo.homepage=i.homepage;          
+        this.repos.push(repo);
+        resolve(username);
+      }
+    }).catch(err => reject(err));
+   });
+   console.log(this.repos);
+   return promise;    
   
 }
+}
+//?gitToken=${environment.token}
+
