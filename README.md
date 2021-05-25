@@ -43,6 +43,9 @@ Or you can pick the option of downlading the zip file of the project then you ri
  * Angular
  * Typescript
  * Git API
+ ## Known Bugs
+Api repo not displaying due to gitToken issue. Contact budds300@gmail.com for feedback.
+
 ## Support & Contact
 For any assistance or collaboration reach out to me on budds300@gmail.com
 ## Copyright and License
